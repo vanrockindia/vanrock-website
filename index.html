@@ -1,39 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>VanRock | Stainless Steel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANROCK | Precision Stainless Steel Solutions</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        h1 { font-size: 5rem; letter-spacing: 15px; color: #fff; margin: 0; }
-        .products { padding: 100px 50px; background: rgba(0,0,0,0.8); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { border: 1px solid #444; padding: 40px; border-radius: 5px; background: #111; }
-        .card h3 { color: #ff4500; }
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --accent-color: #00bcd4;
+            --text-main: #ffffff;
+            --text-muted: #b3b3b3;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-index: 1.6;
+        }
+        header {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #2d2d2d;
+        }
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-main);
+        }
+        .subtitle {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .about-box {
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 4px;
+            margin-bottom: 3rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .card {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid #2d2d2d;
+        }
+        .card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #000000;
+            padding: 1rem 2.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #00acc1;
+        }
     </style>
 </head>
 <body>
-    <div class="hero"><h1>VANROCK</h1><p>3D DESIGNED STAINLESS STEEL</p></div>
-    <div class="products">
-        <div class="card"><h3>Industrial Pipes</h3><p>Seamless 304/316 Stainless Steel.</p></div>
-        <div class="card"><h3>Custom Fittings</h3><p>Precision 3D engineered components.</p></div>
-        <div class="card"><h3>Steel Sheets</h3><p>High-grade architectural finishes.</p></div>
+
+    <header>
+        <h1>VANROCK</h1>
+        <div class="subtitle">Precision-Engineered Stainless Steel Solutions</div>
+    </header>
+
+    <div class="container">
+        <div class="about-box">
+            <p>Operating from our advanced manufacturing hub in <strong>Hyderabad, India</strong>, Vanrock delivers zero-tolerance stainless steel components tailored to rigorous international standards. We bridge the gap between heavy industrial scaling and micro-precision accuracy.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Industrial Pipes</h3>
+                <p>Manufactured to strict ASTM A312 specifications. Available in both seamless and welded configurations, catering to premium-grade, high-pressure piping networks globally.</p>
+            </div>
+            <div class="card">
+                <h3>Custom Fittings</h3>
+                <p>Engineered completely to ASME B16.9 criteria. Includes high-input manufacturing for Butt-weld variants, Elbows, Tees, and Reducers with flawless joint finishes.</p>
+            </div>
+            <div class="card">
+                <h3>Precision Flanges</h3>
+                <p>Advanced ASME B16.5 compliant designs including Weld Neck, Slip-On, and Blind layouts. Rated from Class 150 to 2500, featuring precise concentric bolt-hole alignments and smooth sealing faces.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="mailto:sales@vanrock.in" class="btn">Submit Technical RFQ</a>
+        </div>
     </div>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-        const material = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 1, roughness: 0.1 });
-        const obj = new THREE.Mesh(geometry, material);
-        scene.add(obj);
-        const light = new THREE.PointLight(0xffffff, 2, 100); light.position.set(10,10,10); scene.add(light);
-        camera.position.z = 40;
-        function animate() { requestAnimationFrame(animate); obj.rotation.y += 0.01; renderer.render(scene, camera); }
-        animate();
-    </script>
+
 </body>
 </html>
