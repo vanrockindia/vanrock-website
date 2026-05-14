@@ -7,17 +7,16 @@
     <style>
         :root {
             --bg-color: #05070f;
-            --surface-color: rgba(17, 24, 39, 0.2);
+            --surface-color: rgba(17, 24, 39, 0.4);
             --accent-color: #00bcd4;
             --text-main: #ffffff;
             --text-muted: #9ca3af;
-            --border-color: rgba(31, 41, 55, 0.4);
+            --border-color: rgba(0, 188, 212, 0.2);
         }
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
             overflow-x: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
@@ -30,7 +29,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            background-color: var(--bg-color);
+            pointer-events: none;
         }
         .main-wrapper {
             position: relative;
@@ -40,6 +39,7 @@
         header {
             padding: 8rem 2rem 4rem 2rem;
             text-align: center;
+            background: linear-gradient(to bottom, rgba(5,7,15,0.6) 0%, transparent 100%);
         }
         h1 {
             font-size: 4.5rem;
@@ -75,7 +75,7 @@
         .about-box p {
             margin: 0;
             font-size: 1.3rem;
-            color: var(--text-main);
+            color: #e2e8f0;
             line-height: 1.8;
         }
         .grid {
@@ -96,7 +96,7 @@
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-color);
-            box-shadow: 0 15px 30px rgba(0, 188, 212, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 188, 212, 0.15);
         }
         .card h3 {
             color: var(--text-main);
@@ -177,14 +177,14 @@
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
         const geometry = new THREE.BufferGeometry();
-        const pointsCount = 3000;
+        const pointsCount = 3500; 
         const positions = new Float32Array(pointsCount * 3);
 
         for(let i = 0; i < pointsCount * 3; i += 3) {
@@ -199,7 +199,7 @@
             size: 0.03,
             color: 0x00bcd4,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.75,
             blending: THREE.AdditiveBlending
         });
 
@@ -224,8 +224,8 @@
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
 
-            mesh.rotation.y = elapsedTime * 0.03;
-            mesh.rotation.x = elapsedTime * 0.01;
+            mesh.rotation.y = elapsedTime * 0.04;
+            mesh.rotation.x = elapsedTime * 0.015;
 
             mesh.position.x += (mouseX * 1.2 - mesh.position.x) * 0.05;
             mesh.position.y += (-mouseY * 1.2 - mesh.position.y) * 0.05;
