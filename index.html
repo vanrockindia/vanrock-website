@@ -6,89 +6,110 @@
     <title>VANROCK | Precision Stainless Steel Solutions</title>
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --surface-color: #111827;
+            --bg-color: #05070f;
+            --surface-color: rgba(17, 24, 39, 0.85);
             --accent-color: #00bcd4;
             --text-main: #ffffff;
             --text-muted: #9ca3af;
-            --border-color: #1f2937;
+            --border-color: rgba(31, 41, 55, 0.6);
         }
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
         }
         header {
-            padding: 5rem 2rem;
+            padding: 7rem 2rem 4rem 2rem;
             text-align: center;
-            background: radial-gradient(circle at top, #1e293b 0%, var(--bg-color) 70%);
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(to bottom, rgba(5,7,15,0.8) 0%, transparent 100%);
         }
         h1 {
-            font-size: 3.5rem;
-            letter-spacing: 6px;
+            font-size: 4rem;
+            letter-spacing: 12px;
             margin: 0 0 1rem 0;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--text-main);
+            text-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
         }
         .subtitle {
             color: var(--accent-color);
             font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-weight: 600;
         }
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 2rem 2rem 6rem 2rem;
         }
         .about-box {
             background-color: var(--surface-color);
-            padding: 2.5rem;
-            border-radius: 8px;
+            padding: 3rem;
+            border-radius: 12px;
             margin-bottom: 4rem;
             border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-left: 4px solid var(--accent-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
         .about-box p {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
             line-height: 1.8;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             margin-bottom: 5rem;
         }
         .card {
             background-color: var(--surface-color);
             padding: 2.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s, border-color 0.2s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
             border-color: var(--accent-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 188, 212, 0.15);
         }
         .card h3 {
             color: var(--text-main);
-            margin: 0 0 1rem 0;
+            margin: 0 0 1.2rem 0;
             font-size: 1.5rem;
             letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
         .card p {
             color: var(--text-muted);
             margin: 0;
             font-size: 1rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         .cta-section {
             text-align: center;
@@ -97,53 +118,127 @@
         .btn {
             display: inline-block;
             background-color: var(--accent-color);
-            color: #0b0f19;
-            padding: 1.2rem 3rem;
+            color: #05070f;
+            padding: 1.2rem 3.5rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 1rem;
-            transition: opacity 0.2s;
-            box-shadow: 0 4px 14px rgba(0, 188, 212, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4);
         }
         .btn:hover {
-            opacity: 0.9;
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(0, 188, 212, 0.6);
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <header>
-        <h1>VANROCK</h1>
-        <div class="subtitle">Precision-Engineered Stainless Steel Solutions</div>
-    </header>
+    <div id="canvas-container"></div>
 
-    <div class="container">
-        <div class="about-box">
-            <p>Operating from our advanced manufacturing hub in <strong>Hyderabad, India</strong>, Vanrock delivers zero-tolerance stainless steel components tailored to rigorous international standards. We bridge the gap between heavy industrial scaling and micro-precision accuracy.</p>
-        </div>
+    <div class="main-wrapper">
+        <header>
+            <h1>VANROCK</h1>
+            <div class="subtitle">Precision-Engineered Stainless Steel Solutions</div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Industrial Pipes</h3>
-                <p>Manufactured to strict ASTM A312 specifications. Available in both seamless and welded configurations, catering to premium-grade, high-pressure piping networks globally.</p>
+        <div class="container">
+            <div class="about-box">
+                <p>Operating from our advanced manufacturing hub in <strong>Hyderabad, India</strong>, Vanrock delivers zero-tolerance stainless steel components tailored to rigorous international standards. We bridge the gap between heavy industrial scaling and micro-precision accuracy.</p>
             </div>
-            <div class="card">
-                <h3>Custom Fittings</h3>
-                <p>Engineered completely to ASME B16.9 criteria. Includes high-input manufacturing for Butt-weld variants, Elbows, Tees, and Reducers with flawless joint finishes.</p>
-            </div>
-            <div class="card">
-                <h3>Precision Flanges</h3>
-                <p>Advanced ASME B16.5 compliant designs including Weld Neck, Slip-On, and Blind layouts. Rated from Class 150 to 2500, featuring precise concentric bolt-hole alignments and smooth sealing faces.</p>
-            </div>
-        </div>
 
-        <div class="cta-section">
-            <a href="mailto:sales@vanrock.in" class="btn">Submit Technical RFQ</a>
+            <div class="grid">
+                <div class="card">
+                    <h3>Industrial Pipes</h3>
+                    <p>Manufactured to strict ASTM A312 specifications. Available in both seamless and welded configurations, catering to premium-grade, high-pressure piping networks globally.</p>
+                </div>
+                <div class="card">
+                    <h3>Custom Fittings</h3>
+                    <p>Engineered completely to ASME B16.9 criteria. Includes high-input manufacturing for Butt-weld variants, Elbows, Tees, and Reducers with flawless joint finishes.</p>
+                </div>
+                <div class="card">
+                    <h3>Precision Flanges</h3>
+                    <p>Advanced ASME B16.5 compliant designs including Weld Neck, Slip-On, and Blind layouts. Rated from Class 150 to 2500, featuring precise concentric bolt-hole alignments and smooth sealing faces.</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <a href="mailto:sales@vanrock.in" class="btn">Submit Technical RFQ</a>
+            </div>
         </div>
     </div>
 
+    <script>
+        // Immersive 3D Space Scene Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Build 3D Structured Core Grid (Simulating Pipeline Intersects)
+        const geometry = new THREE.BufferGeometry();
+        const verticesCnt = 1200;
+        const posArray = new Float32Array(verticesCnt * 3);
+
+        for(let i=0; i < verticesCnt * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        // Styling the 3D Node Clusters
+        const material = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0x00bcd4,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const mesh = new THREE.Points(geometry, material);
+        scene.add(mesh);
+        camera.position.z = 3;
+
+        // Interactive Mouse Tracking Variables
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        });
+
+        // Responsive Resizing Engine
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Real-Time 3D Frame Loop
+        const clock = new THREE.Clock();
+        const animate = () => {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Continuous Structural Spin
+            mesh.rotation.y = elapsedTime * 0.05;
+            mesh.rotation.x = elapsedTime * 0.02;
+
+            // Fluid Reactive Tracking based on Mouse Coordinates
+            mesh.position.x += (mouseX * 0.6 - mesh.position.x) * 0.1;
+            mesh.position.y += (-mouseY * 0.6 - mesh.position.y) * 0.1;
+
+            renderer.render(scene, camera);
+        };
+        animate();
+    </script>
 </body>
 </html>
