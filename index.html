@@ -6,8 +6,8 @@
     <title>VANROCK | Precision Stainless Steel Solutions</title>
     <style>
         :root {
-            --bg-color: #060913;
-            --surface-color: rgba(15, 23, 42, 0.4);
+            --bg-color: #05070f;
+            --surface-color: rgba(17, 24, 39, 0.4);
             --accent-color: #00bcd4;
             --text-main: #ffffff;
             --text-muted: #94a3b8;
@@ -194,13 +194,11 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // Advanced Matrix Lattice Build
         const geometry = new THREE.BufferGeometry();
         const pointsCount = 3000;
         const positions = new Float32Array(pointsCount * 3);
 
         for(let i = 0; i < pointsCount * 3; i += 3) {
-            // Generating high-density geometric streams
             positions[i] = (Math.random() - 0.5) * 12;
             positions[i+1] = (Math.random() - 0.5) * 12;
             positions[i+2] = (Math.random() - 0.5) * 12;
@@ -212,7 +210,7 @@
             size: 0.02,
             color: 0x00bcd4,
             transparent: true,
-            opacity: 0.45,
+            opacity: 0.55,
             blending: THREE.AdditiveBlending
         });
 
@@ -235,11 +233,9 @@
         const animate = () => {
             requestAnimationFrame(animate);
             
-            // Kinetic rotation sequence
             particleMesh.rotation.y += 0.001;
             particleMesh.rotation.x += 0.0005;
 
-            // Fluid micro-inertia positioning
             particleMesh.position.x += (targetX * 1.5 - particleMesh.position.x) * 0.05;
             particleMesh.position.y += (-targetY * 1.5 - particleMesh.position.y) * 0.05;
 
