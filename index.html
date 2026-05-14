@@ -7,11 +7,11 @@
     <style>
         :root {
             --bg-color: #05070f;
-            --surface-color: rgba(17, 24, 39, 0.4);
+            --surface-color: rgba(17, 24, 39, 0.7);
             --accent-color: #00bcd4;
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border-color: rgba(0, 188, 212, 0.15);
+            --text-muted: #9ca3af;
+            --border-color: rgba(31, 41, 55, 0.6);
         }
         body, html {
             margin: 0;
@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            pointer-events: none;
+            background-color: var(--bg-color);
         }
         .main-wrapper {
             position: relative;
@@ -37,113 +37,102 @@
             background: transparent;
         }
         header {
-            padding: 8rem 2rem 5rem 2rem;
+            padding: 7rem 2rem 4rem 2rem;
             text-align: center;
+            background: linear-gradient(to bottom, rgba(5,7,15,0.6) 0%, transparent 100%);
         }
         h1 {
-            font-size: 4.5rem;
-            letter-spacing: 16px;
+            font-size: 4rem;
+            letter-spacing: 12px;
             margin: 0 0 1rem 0;
             font-weight: 900;
             color: var(--text-main);
-            text-shadow: 0 0 30px rgba(0, 188, 212, 0.3);
-            animation: pulseGlow 4s ease-in-out infinite alternate;
-        }
-        @keyframes pulseGlow {
-            0% { text-shadow: 0 0 20px rgba(0, 188, 212, 0.2); }
-            100% { text-shadow: 0 0 40px rgba(0, 188, 212, 0.5); }
+            text-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
         }
         .subtitle {
             color: var(--accent-color);
             font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             font-weight: 600;
         }
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 2rem 8rem 2rem;
+            padding: 2rem 2rem 6rem 2rem;
         }
         .about-box {
-            background: var(--surface-color);
+            background-color: var(--surface-color);
             padding: 3rem;
-            border-radius: 16px;
-            margin-bottom: 5rem;
+            border-radius: 12px;
+            margin-bottom: 4rem;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-left: 4px solid var(--accent-color);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
         .about-box p {
             margin: 0;
-            font-size: 1.3rem;
-            color: #e2e8f0;
+            font-size: 1.25rem;
+            color: var(--text-muted);
             line-height: 1.8;
-            font-weight: 300;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
-            margin-bottom: 6rem;
+            margin-bottom: 5rem;
         }
         .card {
-            background: var(--surface-color);
-            padding: 3rem 2.5rem;
-            border-radius: 16px;
+            background-color: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
         }
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
             border-color: var(--accent-color);
-            box-shadow: 0 25px 50px -12px rgba(0, 188, 212, 0.25);
-            background: rgba(15, 23, 42, 0.6);
+            box-shadow: 0 10px 25px -5px rgba(0, 188, 212, 0.15);
         }
         .card h3 {
             color: var(--text-main);
-            margin: 0 0 1.5rem 0;
-            font-size: 1.6rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0.75rem;
-            transition: border-color 0.4s;
-        }
-        .card:hover h3 {
-            border-color: var(--accent-color);
+            margin: 0 0 1.2rem 0;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
         .card p {
             color: var(--text-muted);
             margin: 0;
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.7;
         }
         .cta-section {
             text-align: center;
+            padding: 2rem 0;
         }
         .btn {
             display: inline-block;
             background-color: var(--accent-color);
-            color: #060913;
-            padding: 1.3rem 4rem;
+            color: #05070f;
+            padding: 1.2rem 3.5rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 8px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.95rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 25px rgba(0, 188, 212, 0.4);
+            letter-spacing: 2px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4);
         }
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 35px rgba(0, 188, 212, 0.6);
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(0, 188, 212, 0.6);
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -187,41 +176,39 @@
     <script>
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
         const geometry = new THREE.BufferGeometry();
-        const pointsCount = 3000;
-        const positions = new Float32Array(pointsCount * 3);
+        const verticesCnt = 1800; 
+        const posArray = new Float32Array(verticesCnt * 3);
 
-        for(let i = 0; i < pointsCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 12;
-            positions[i+1] = (Math.random() - 0.5) * 12;
-            positions[i+2] = (Math.random() - 0.5) * 12;
+        for(let i=0; i < verticesCnt * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 10;
         }
 
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
         const material = new THREE.PointsMaterial({
-            size: 0.02,
+            size: 0.035,
             color: 0x00bcd4,
             transparent: true,
-            opacity: 0.55,
+            opacity: 0.85,
             blending: THREE.AdditiveBlending
         });
 
-        const particleMesh = new THREE.Points(geometry, material);
-        scene.add(particleMesh);
-        camera.position.z = 5;
+        const mesh = new THREE.Points(geometry, material);
+        scene.add(mesh);
+        camera.position.z = 3;
 
-        let targetX = 0, targetY = 0;
-        document.addEventListener('mousemove', (e) => {
-            targetX = (e.clientX / window.innerWidth) - 0.5;
-            targetY = (e.clientY / window.innerHeight) - 0.5;
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
         });
 
         window.addEventListener('resize', () => {
@@ -230,14 +217,16 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
+        const clock = new THREE.Clock();
         const animate = () => {
             requestAnimationFrame(animate);
-            
-            particleMesh.rotation.y += 0.001;
-            particleMesh.rotation.x += 0.0005;
+            const elapsedTime = clock.getElapsedTime();
 
-            particleMesh.position.x += (targetX * 1.5 - particleMesh.position.x) * 0.05;
-            particleMesh.position.y += (-targetY * 1.5 - particleMesh.position.y) * 0.05;
+            mesh.rotation.y = elapsedTime * 0.05;
+            mesh.rotation.x = elapsedTime * 0.02;
+
+            mesh.position.x += (mouseX * 0.6 - mesh.position.x) * 0.1;
+            mesh.position.y += (-mouseY * 0.6 - mesh.position.y) * 0.1;
 
             renderer.render(scene, camera);
         };
